@@ -108,6 +108,12 @@ DeviceClient.prototype.callAction = function(serviceId, actionName, params, call
     Object.keys(params).forEach(function(paramName) {
       var tmp = et.SubElement(action, paramName);
       var value = params[paramName];
+
+      if (paramName === 'CurrentURI') {
+        tmp.append(et.CData(value))
+        return;
+      }
+
       tmp.text = (value === null)
         ? '' 
         : params[paramName].toString();
